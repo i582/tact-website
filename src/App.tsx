@@ -4,7 +4,7 @@ import './App.css'
 import heroImage from './assets/image.png'
 import sticker from './assets/sticker.webp'
 import {GoShieldCheck, GoCode, GoRuby} from "react-icons/go";
-import { useState } from 'react';
+import {useState} from 'react';
 
 function tokenize(code: string): { type: string; content: string }[] {
     const patterns = {
@@ -33,7 +33,7 @@ function tokenize(code: string): { type: string; content: string }[] {
         // Check for whitespace
         const whitespace = remaining.match(/^\s+/);
         if (whitespace) {
-            tokens.push({ type: 'text', content: whitespace[0] });
+            tokens.push({type: 'text', content: whitespace[0]});
             remaining = remaining.slice(whitespace[0].length);
             continue;
         }
@@ -42,7 +42,7 @@ function tokenize(code: string): { type: string; content: string }[] {
         for (const [type, pattern] of Object.entries(patterns)) {
             const tokenMatch = remaining.match(pattern);
             if (tokenMatch && tokenMatch.index === 0) {
-                match = { type, content: tokenMatch[0] };
+                match = {type, content: tokenMatch[0]};
                 break;
             }
         }
@@ -52,7 +52,7 @@ function tokenize(code: string): { type: string; content: string }[] {
             remaining = remaining.slice(match.content.length);
         } else {
             // If no match found, treat the next character as plain text
-            tokens.push({ type: 'text', content: remaining[0] });
+            tokens.push({type: 'text', content: remaining[0]});
             remaining = remaining.slice(1);
         }
     }
@@ -60,7 +60,7 @@ function tokenize(code: string): { type: string; content: string }[] {
     return tokens;
 }
 
-function ShowcaseCode({ code, title, description }: { code: string, title?: string, description?: string }) {
+function ShowcaseCode({code, title, description}: { code: string, title?: string, description?: string }) {
     return (
         <div className="showcase-code">
             {(title || description) && (
@@ -112,9 +112,9 @@ const FEATURES = [
     }
 }`,
         details: [
-            { icon: '📝', text: 'Familiar syntax' },
-            { icon: '🎯', text: 'Easy to learn' },
-            { icon: '🔍', text: 'Clear and readable' }
+            {icon: '📝', text: 'Familiar syntax'},
+            {icon: '🎯', text: 'Easy to learn'},
+            {icon: '🔍', text: 'Clear and readable'}
         ]
     },
     {
@@ -135,9 +135,9 @@ message Transfer {
 
 const transfers: map<Address, Int> = new Map();`,
         details: [
-            { icon: '🛡️', text: 'Type-safe by default' },
-            { icon: '📦', text: 'Built-in blockchain types' },
-            { icon: '🗺️', text: 'First-class maps support' }
+            {icon: '🛡️', text: 'Type-safe by default'},
+            {icon: '📦', text: 'Built-in blockchain types'},
+            {icon: '🗺️', text: 'First-class maps support'}
         ]
     },
     {
@@ -163,9 +163,9 @@ bounced(msg: Slice) {
     // Bounced message handling
 }`,
         details: [
-            { icon: '🔄', text: 'Automatic routing' },
-            { icon: '📨', text: 'Type-safe messages' },
-            { icon: '🔙', text: 'Bounced handling' }
+            {icon: '🔄', text: 'Automatic routing'},
+            {icon: '📨', text: 'Type-safe messages'},
+            {icon: '🔙', text: 'Bounced handling'}
         ]
     },
     {
@@ -189,9 +189,9 @@ fallback(msg: Slice) {
     // Fallback for unknown messages
 }`,
         details: [
-            { icon: '📝', text: 'Text messages' },
-            { icon: '💻', text: 'Binary messages' },
-            { icon: '🔄', text: 'Fallback handling' }
+            {icon: '📝', text: 'Text messages'},
+            {icon: '💻', text: 'Binary messages'},
+            {icon: '🔄', text: 'Fallback handling'}
         ]
     },
     {
@@ -214,9 +214,9 @@ fallback(msg: Slice) {
     }
 }`,
         details: [
-            { icon: '🗺️', text: 'Native map type' },
-            { icon: '🔄', text: 'Foreach support' },
-            { icon: '⚡', text: 'Efficient storage' }
+            {icon: '🗺️', text: 'Native map type'},
+            {icon: '🔄', text: 'Foreach support'},
+            {icon: '⚡', text: 'Efficient storage'}
         ]
     },
     {
@@ -237,10 +237,61 @@ fallback(msg: Slice) {
     };
 }`,
         details: [
-            { icon: '⚙️', text: 'Direct TVM access' },
-            { icon: '🚀', text: 'Maximum performance' },
-            { icon: '🔧', text: 'Low-level control' }
+            {icon: '⚙️', text: 'Direct TVM access'},
+            {icon: '🚀', text: 'Maximum performance'},
+            {icon: '🔧', text: 'Low-level control'}
         ]
+    }
+];
+
+const LEARNING_RESOURCES = [
+    {
+        id: 'docs',
+        title: 'Documentation',
+        description: 'Comprehensive documentation with guides, examples, and API reference',
+        icon: '📚',
+        link: '#',
+        tags: ['Guides', 'API', 'Examples']
+    },
+    {
+        id: 'playground',
+        title: 'Playground',
+        description: 'Interactive environment to write, test and deploy Tact contracts',
+        icon: '🎮',
+        link: '#',
+        tags: ['Interactive', 'Testing', 'Deploy']
+    },
+    {
+        id: 'kitchen',
+        title: 'Tact Kitchen',
+        description: 'Collection of ready-to-use smart contract templates and examples',
+        icon: '👨‍🍳',
+        link: '#',
+        tags: ['Templates', 'Examples', 'Patterns']
+    },
+    {
+        id: 'github',
+        title: 'GitHub',
+        description: 'Open source repository with compiler, tools and documentation',
+        icon: '🐙',
+        link: '#',
+        tags: ['Source', 'Tools', 'Community']
+    },
+    {
+        id: 'telegram',
+        title: 'Telegram Community',
+        description: 'Join our active community to get help and share knowledge',
+        icon: '💬',
+        link: '#',
+        tags: ['Support', 'Discussion', 'Updates']
+    },
+    {
+        id: 'tutorials',
+        title: 'Video Tutorials',
+        description: 'Step-by-step video guides for learning Tact development',
+        icon: '🎥',
+        link: '#',
+        tags: ['Learning', 'Video', 'Guides']
     }
 ];
 
@@ -383,7 +434,8 @@ function App() {
 
                         <div className="second-page-description">
                             <p>As of the beginning of 2025, nearly 28,000 unique smart contracts were live on the
-                                TON mainnet. About a third were written in Tact, reflecting its increasing adoption among
+                                TON mainnet. About a third were written in Tact, reflecting its increasing adoption
+                                among
                                 developers.
                             </p>
 
@@ -432,7 +484,7 @@ function App() {
                                         {currentFeature?.description}
                                     </div>
                                 </div>
-                                
+
                                 <div className="feature-info-details">
                                     {currentFeature?.details.map((detail, index) => (
                                         <div key={index} className="feature-detail-item">
@@ -442,8 +494,8 @@ function App() {
                                     ))}
                                 </div>
 
-                                <ShowcaseCode 
-                                    code={currentFeature?.code || ''} 
+                                <ShowcaseCode
+                                    code={currentFeature?.code || ''}
                                     title="Example"
                                     description="Try it in the playground"
                                 />
@@ -452,8 +504,85 @@ function App() {
                     </div>
                 </div>
 
-                <div className="fourth-page"></div>
+                <div className="fourth-page">
+                    <div className="fourth-page-content">
+                        <h2 className="fourth-page-title">
+                            Learning Resources
+                        </h2>
+                        <div className="fourth-page-description">
+                            Everything you need to start building with Tact
+                        </div>
+
+                        <div className="resources-grid">
+                            {LEARNING_RESOURCES.map(resource => (
+                                <a key={resource.id} href={resource.link} className="resource-card">
+                                    <div className="resource-icon">{resource.icon}</div>
+                                    <div className="resource-content">
+                                        <div className="resource-title">{resource.title}</div>
+                                        <div className="resource-description">{resource.description}</div>
+                                        <div className="resource-tags">
+                                            {resource.tags.map(tag => (
+                                                <span key={tag} className="resource-tag">{tag}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </main>
+            <footer>
+                <div className="footer-content">
+                    <div className="footer-main">
+                        <div className="footer-sponsored">
+                            <span>Sponsored by</span>
+                            <div className="ton-foundation">
+                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M9.83855 12.0186L13.8648 5.4896C14.9707 3.69621 15.5237 2.79952 15.4611 2.06026C15.4066 1.4158 15.0773 0.825974 14.5574 0.441281C13.961 0 12.9075 0 10.8006 0H5.19949C3.09253 0 2.03904 0 1.44265 0.441281C0.92273 0.825974 0.593499 1.4158 0.538957 2.06026C0.476393 2.79952 1.02936 3.69621 2.13528 5.4896L6.1615 12.0186C6.77009 13.0055 7.07439 13.499 7.46527 13.6676C7.80657 13.8148 8.19348 13.8148 8.53478 13.6676C8.92566 13.499 9.22996 13.0055 9.83855 12.0186ZM7.20003 1.60003V10.6499L2.62126 3.18373C2.30384 2.66615 2.14514 2.40736 2.16356 2.1941C2.17962 2.00817 2.27481 1.83811 2.42491 1.72722C2.59709 1.60003 2.90066 1.60003 3.50782 1.60003H7.20003ZM8.80003 10.65V1.5999H12.4923C13.0994 1.5999 13.403 1.5999 13.5752 1.7271C13.7253 1.83799 13.8205 2.00804 13.8365 2.19397C13.8549 2.40723 13.6962 2.66601 13.3788 3.18358L8.80003 10.65Z"
+                                          fill="#99A1AD"></path>
+                                </svg>
+                                <span>TON Foundation</span>
+                            </div>
+                        </div>
+                        <div className="footer-links">
+                            <div className="footer-section">
+                                <h4>Resources</h4>
+                                <ul>
+                                    <li><a href="#">Documentation</a></li>
+                                    <li><a href="#">Playground</a></li>
+                                    <li><a href="#">Tact Kitchen</a></li>
+                                    <li><a href="#">Examples</a></li>
+                                </ul>
+                            </div>
+                            <div className="footer-section">
+                                <h4>Community</h4>
+                                <ul>
+                                    <li><a href="#">GitHub</a></li>
+                                    <li><a href="#">Telegram</a></li>
+                                    <li><a href="#">X.com</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div className="footer-section">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Report Issue</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="footer-bottom">
+                        <div className="footer-copyright">
+                            © 2025 Tact Language. All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 }
