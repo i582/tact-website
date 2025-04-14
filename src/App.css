@@ -301,6 +301,7 @@ main h2 {
   gap: 1rem;
 
   max-width: 15rem;
+  min-width: 15rem;
   position: relative;
 
   -webkit-backdrop-filter: blur(40px);
@@ -808,4 +809,3 @@ main h2 {
 
   height: 100vh;
 }
-
