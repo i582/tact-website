@@ -3,7 +3,7 @@ import pixelSwapLogo from './assets/pixel-swap-log.png'
 import './App.css'
 import heroImage from './assets/image.png'
 import sticker from './assets/sticker.webp'
-import {GoShieldCheck, GoCode, GoRuby} from "react-icons/go";
+import {GoShieldCheck, GoCode, GoRuby, GoListUnordered} from "react-icons/go";
 import {useState} from 'react';
 
 function tokenize(code: string): { type: string; content: string }[] {
@@ -297,6 +297,7 @@ const LEARNING_RESOURCES = [
 
 function App() {
     const [activeFeature, setActiveFeature] = useState(FEATURES[0].id);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const currentFeature = FEATURES.find(f => f.id === activeFeature);
 
     return (
@@ -307,14 +308,21 @@ function App() {
                         <img src={logo} alt="Tact Logo"/>
                         <span>Tact</span>
                     </div>
-                    <nav>
-                        <ul>
-                            <li><a href="#">Playground</a></li>
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">GitHub</a></li>
-                            <li><a href="#">Telegram</a></li>
-                            <li><a href="#">Tact Kitchen</a></li>
-                            <li><a href="#">X.com</a></li>
+                    <nav className={isMobileMenuOpen ? 'mobile-menu-open' : ''}>
+                        <button
+                            className="mobile-menu-button"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            <GoListUnordered/>
+                        </button>
+                        <ul className="mobile-menu-list">
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>Playground</a></li>
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>Documentation</a></li>
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>GitHub</a></li>
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>Telegram</a></li>
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>Tact Kitchen</a></li>
+                            <li><a href="#" onClick={() => setIsMobileMenuOpen(false)}>X.com</a></li>
                         </ul>
                     </nav>
                 </div>
